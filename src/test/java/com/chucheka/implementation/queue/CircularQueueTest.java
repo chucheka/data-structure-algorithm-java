@@ -1,0 +1,59 @@
+package com.chucheka.implementation.queue;
+
+import com.chucheka.implementation.exceptions.EmptyQueueException;
+import com.chucheka.implementation.exceptions.QueueOverFlowException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+
+class CircularQueueTest {
+
+    private CircularQueue queue;
+
+    @BeforeEach
+    void setup() {
+        queue = new CircularQueue(5);
+    }
+
+    @Test
+    public void testIsEmpty_ShouldReturnTrue_WhenQueueIsEmpty() {
+        assertTrue(queue.isEmpty());
+    }
+
+    @Test
+    public void testIsFull_ShouldReturnFalse_WhenQueueIsNotFull() {
+        assertFalse(queue.isFull());
+    }
+
+    @Test
+    public void testEnqueue_ShouldBeAbleToEnqueue_WhenQueueIsNotFull() {
+        assertDoesNotThrow(() -> queue.enqueue(2));
+        assertEquals(1, queue.size());
+    }
+
+    @Test
+    public void testEnqueue_ShouldThrowException_WhenQueueIsFull() {
+        queue.enqueue(2);
+        queue.enqueue(4);
+        queue.enqueue(6);
+        queue.enqueue(10);
+        queue.enqueue(12);
+
+        assertThrows(QueueOverFlowException.class, () -> queue.enqueue(14));
+    }
+
+    @Test
+    public void testDequeue_ShouldThrowException_WhenQueueIsEmpty() {
+        assertThrows(EmptyQueueException.class, () -> queue.dequeue());
+    }
+
+    @Test
+    public void testDequeue_ShouldBeAbleToDequeue_WhenQueueIsNotEmpty() {
+        queue.enqueue(3);
+        int value = queue.dequeue();
+        assertEquals(3, value);
+        assertEquals(0, queue.size());
+    }
+}
