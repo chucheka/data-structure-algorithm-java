@@ -1,13 +1,14 @@
 package com.chucheka.implementation.stack;
 
 import com.chucheka.implementation.exceptions.EmptyStackException;
-import com.chucheka.implementation.exceptions.StackOverflowException;
+
+import java.util.Arrays;
 
 
 public class Stack<E> {
-    private final E[] arr;
+    private E[] arr;
     private int top;
-    private final int capacity;
+    private int capacity;
     private static final int DEFAULT_CAPACITY = 10;
 
     public Stack(int capacity) {
@@ -26,7 +27,7 @@ public class Stack<E> {
 
     public void push(E value) {
 
-        if (this.IsFull()) throw new StackOverflowException("Stack overflow error");
+        if (this.IsFull()) resize();
 
         this.arr[++top] = value;
     }
@@ -49,9 +50,14 @@ public class Stack<E> {
         return this.arr[top];
     }
 
-    public int size(){
+    public int size() {
         if (this.IsEmpty()) return 0;
 
         return this.top + 1;
+    }
+
+    private void resize() {
+        this.capacity = this.capacity * 2;
+        this.arr = Arrays.copyOf(this.arr, this.capacity);
     }
 }

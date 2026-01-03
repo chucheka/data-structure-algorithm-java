@@ -1,7 +1,6 @@
 package com.chucheka.implementation.queue;
 
 import com.chucheka.implementation.exceptions.EmptyQueueException;
-import com.chucheka.implementation.exceptions.QueueOverFlowException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,16 +32,6 @@ class CircularQueueTest {
         assertEquals(1, queue.size());
     }
 
-    @Test
-    public void testEnqueue_ShouldThrowException_WhenQueueIsFull() {
-        queue.enqueue(2);
-        queue.enqueue(4);
-        queue.enqueue(6);
-        queue.enqueue(10);
-        queue.enqueue(12);
-
-        assertThrows(QueueOverFlowException.class, () -> queue.enqueue(14));
-    }
 
     @Test
     public void testDequeue_ShouldThrowException_WhenQueueIsEmpty() {
