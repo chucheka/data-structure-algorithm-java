@@ -46,6 +46,13 @@ public class CircularQueue {
         return value;
     }
 
+    public int peek(){
+        if (isEmpty()) {
+            throw new EmptyQueueException("queue is empty");
+        }
+        return this.arr[front];
+    }
+
     public int size() {
         return rear - front + 1;
     }

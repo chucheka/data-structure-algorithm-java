@@ -56,4 +56,16 @@ class CircularQueueTest {
         assertEquals(3, value);
         assertEquals(0, queue.size());
     }
+
+    @Test
+    public void testPeek_ShouldThrowException_WhenQueueIsEmpty() {
+        assertThrows(EmptyQueueException.class, () -> queue.peek());
+    }
+
+    @Test
+    public void testPeek_ShouldReturnFirstElement_WhenQueueIsNotEmpty() {
+        queue.enqueue(3);
+        queue.enqueue(5);
+        assertEquals(3, queue.peek());
+    }
 }
