@@ -9,11 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class StackTest {
 
-    private Stack stack;
+    private Stack<Integer> stack;
 
     @BeforeEach
     void setup() {
-        stack = new Stack(5);
+        stack = new Stack<>(5);
     }
 
     @Test
