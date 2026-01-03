@@ -19,7 +19,7 @@ public class CircularQueue {
 
     public void enqueue(int value) {
         if (isFull()) {
-            throw new QueueOverFlowException("inserting into a queue that already full");
+            throw new QueueOverFlowException("inserting into a queue that is already full");
         }
         if (isEmpty()) {
             front += 1;
