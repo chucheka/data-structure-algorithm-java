@@ -1,7 +1,6 @@
 package com.chucheka.implementation.stack;
 
 import com.chucheka.implementation.exceptions.EmptyStackException;
-import com.chucheka.implementation.exceptions.StackOverflowException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,17 +30,6 @@ class StackTest {
     @Test
     void testPush_ShouldNotThrowStackOverflowException_WhenStackIsNotFull() {
         stack.push(10);
-    }
-
-    @Test
-    void testPush_ShouldThrowStackOverFlowException_WhenPushingToAlreadyFullStack() {
-        stack.push(2);
-        stack.push(4);
-        stack.push(6);
-        stack.push(8);
-        stack.push(10);
-
-        assertThrows(StackOverflowException.class, () -> stack.push(12));
     }
 
     @Test

@@ -1,7 +1,8 @@
 package com.chucheka.implementation.queue;
 
 import com.chucheka.implementation.exceptions.EmptyQueueException;
-import com.chucheka.implementation.exceptions.QueueOverFlowException;
+
+import java.util.Arrays;
 
 public class CircularQueue<E> {
 
@@ -19,8 +20,9 @@ public class CircularQueue<E> {
 
     public void enqueue(E value) {
         if (isFull()) {
-            throw new QueueOverFlowException("inserting into a queue that is already full");
+            resize();
         }
+
         if (isEmpty()) {
             front += 1;
         }
@@ -46,7 +48,7 @@ public class CircularQueue<E> {
         return value;
     }
 
-    public E peek(){
+    public E peek() {
         if (isEmpty()) {
             throw new EmptyQueueException("queue is empty");
         }
@@ -67,5 +69,11 @@ public class CircularQueue<E> {
 
     public boolean isFull() {
         return (rear + 1) % this.capacity == front;
+    }
+
+    private void resize() {
+        this.capacity = this.capacity * 2;
+
+        this.arr = Arrays.copyOf(this.arr, this.capacity);
     }
 }
