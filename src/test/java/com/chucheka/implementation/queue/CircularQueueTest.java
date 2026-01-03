@@ -10,11 +10,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CircularQueueTest {
 
-    private CircularQueue queue;
+    private CircularQueue<Integer> queue;
 
     @BeforeEach
     void setup() {
-        queue = new CircularQueue(5);
+        queue = new CircularQueue<>(5);
     }
 
     @Test

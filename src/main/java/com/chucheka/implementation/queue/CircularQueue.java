@@ -3,21 +3,21 @@ package com.chucheka.implementation.queue;
 import com.chucheka.implementation.exceptions.EmptyQueueException;
 import com.chucheka.implementation.exceptions.QueueOverFlowException;
 
-public class CircularQueue {
+public class CircularQueue<E> {
 
-    private Integer[] arr;
+    private E[] arr;
     private Integer capacity;
     private int front, rear;
 
 
     public CircularQueue(int capacity) {
         this.capacity = capacity;
-        arr = new Integer[this.capacity];
+        arr = (E[]) new Object[this.capacity];
         this.front = -1;
         this.rear = -1;
     }
 
-    public void enqueue(int value) {
+    public void enqueue(E value) {
         if (isFull()) {
             throw new QueueOverFlowException("inserting into a queue that is already full");
         }
@@ -28,12 +28,12 @@ public class CircularQueue {
         this.arr[rear] = value;
     }
 
-    public int dequeue() {
+    public E dequeue() {
         if (isEmpty()) {
             throw new EmptyQueueException("queue is empty");
         }
 
-        int value = this.arr[front];
+        E value = this.arr[front];
         this.arr[front] = null;
 
         if (this.front == this.rear) {
@@ -46,7 +46,7 @@ public class CircularQueue {
         return value;
     }
 
-    public int peek(){
+    public E peek(){
         if (isEmpty()) {
             throw new EmptyQueueException("queue is empty");
         }
@@ -54,6 +54,10 @@ public class CircularQueue {
     }
 
     public int size() {
+        if (isEmpty()) return 0;
+
+        if (this.front == this.rear) return 1;
+
         return rear - front + 1;
     }
 
